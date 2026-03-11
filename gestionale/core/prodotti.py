@@ -89,7 +89,7 @@ class HaPrezzoFinale(Protocol):
         ... # equivalente a pass ma al contrario di pass si una quando non si deve scrivere del codice
 
 from dataclasses import dataclass
-@dataclass
+@dataclass(frozen=True)
 class ProdottoRecord:
     name: str
     prezzo_unitario : float
