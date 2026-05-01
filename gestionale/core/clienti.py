@@ -17,6 +17,8 @@ class Cliente:
         self.categoria = categoria
 
 
+
+
     def descrizione(self):
         return f"Cliente {self.nome} ({self.categoria}) - {self.email}"
 
@@ -36,6 +38,9 @@ class ClienteRecord:
     nome: str
     email : str
     categoria : str
+
+    def __str__(self):
+        return f" Cliente {self.nome} -- {self.email} ({self.categoria})"
 
 
 def _test_modulo():
