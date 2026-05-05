@@ -88,19 +88,6 @@ class HaPrezzoFinale(Protocol):
     def prezzo_finale(self):
         ... # equivalente a pass ma al contrario di pass si una quando non si deve scrivere del codice
 
-from dataclasses import dataclass
-@dataclass
-class ProdottoRecord:
-    name: str
-    prezzo_unitario : float
-
-    def __hash__(self):
-        return hash((self.name , self.prezzo_unitario))
-
-    def __str__(self):
-        return f"{self.name} - {self.prezzo_unitario}"
-
-
 MAX_QUANTITA = 1000
 
 def crea_prodotto_standard(nome: str, prezzo: float):

@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 
-from gestionale.core.clienti import ClienteRecord
-from gestionale.core.prodotti import ProdottoRecord
+from gestionale.core.cliente import ClienteRecord
+from gestionale.core.prodotto import ProdottoRecord
 
 
 @dataclass
@@ -36,7 +36,7 @@ class Ordine:
 
         for i, riga in enumerate(self.righe, 1):
             linee.append(
-                f"{i}. {riga.prodotto.name} - "
+                f"{i}. {riga.prodotto.nome} - "
                 f"Q.tà {riga.quantita} x {riga.prodotto.prezzo_unitario}€ = "
                 f"{riga.totale_riga()}€"
             )

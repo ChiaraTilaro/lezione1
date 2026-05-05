@@ -33,14 +33,7 @@ class Cliente:
             raise ValueError("Attenzione, categoria non valida")
             self._categoria = categoria
 
-@dataclass
-class ClienteRecord:
-    nome: str
-    email : str
-    categoria : str
 
-    def __str__(self):
-        return f" Cliente {self.nome} -- {self.email} ({self.categoria})"
 
 
 def _test_modulo():
