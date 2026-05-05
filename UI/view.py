@@ -7,6 +7,7 @@ class View:
         self._page_title = "TdP 2026- software gestionale"
         self._page.horizontal_alignment = "CENTER"
         self._page.theme_mode = ft.ThemeMode.LIGHT
+        self._txtInNomeP = None
         self._page.update()
 
     def carica_interfaccia(self):

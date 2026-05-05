@@ -33,7 +33,7 @@ class GestoreOrdini:
         # Assicuriamoci che un ordine da processare esista
         if not self.ordini_da_processare:
             print("Non ci sono ordini in coda")
-            return False
+            return False , Ordine([] , ClienteRecord("" , "" , ""))
 
         # se esiste, processiamo il primo in coda
         ordine = self.ordini_da_processare.popleft()
@@ -53,15 +53,18 @@ class GestoreOrdini:
         self.ordini_processati.append(ordine)
 
         print(f"Ordine correttamente processato")
-        return True
+        return True , ordine
 
     def processa_tutti_ordini(self):
         """Processa tutti gli ordini attualmente presenti in coda"""
         print(f"Processando tutti {len(self.ordini_da_processare)} ordini")
+        ordini = []
         while self.ordini_da_processare:
-            self.processa_prossimo_ordine()
-
+            _ , ordine = self.processa_prossimo_ordine()
+            ordini.append(ordine)
         print("Tutti gli ordini sono stati processati")
+        return ordini
+
 
     def get_statistiche_prodotti(self , top_n: int = 5):
         """Questo metodo restituisce info su quante unità sono state vendute di un certo prodotto"""
@@ -79,20 +82,23 @@ class GestoreOrdini:
             valori.append((cat , totale_fatturato))
         return valori
 
-    def stampa_riepilogo(self):
-        """Stampa info di massima"""
-        print("\n" + "="*60)
-        print("Stato attuale del business")
-        print(f"Ordini correttamente gestiti: {len(self.ordini_processati)}")
-        print(f"Oridni in coda: {len(self.ordini_da_processare)}")
+    def get_riepilogo(self):
+        """Restituisce una stringa con le info di massima"""
+        sommario = ""
+        sommario += "\n" + "="*60
+        sommario += f" \nOrdini correttamente gestiti: {len(self.ordini_processati)}"
+        sommario += f"\n Oridni in coda: {len(self.ordini_da_processare)}"
 
-        print("Prodotti più venduti:")
+        sommario += "Prodotti più venduti:"
         for prod , quantita in self.get_statistiche_prodotti():
-            print(f"{prod}: {quantita}")
+            sommario += f"\n {prod}: {quantita}"
 
         print("Fatturato per categoria:")
         for cat , fatturato in self.get_distribuzione_categorie():
-            print(f"{cat}: {fatturato}")
+            sommario += f"\n {cat}: {fatturato}"
+        sommario += "\n" + "="*60
+        return sommario
+
 
 
 def test_modulo():
