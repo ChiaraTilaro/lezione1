@@ -19,15 +19,15 @@ class GestoreOrdini:
         self.ordini_processati = []
         self.statistiche_prodotti = Counter()
         self.ordini_per_categoria = defaultdict(list)
-        self._dao = DAO()
+       #  self._dao = DAO()
         self._allP = []
         self._allC = []
         self._fill_data()
 
     def _fill_data(self):
         # leggo prodotti e clienti dal db e creo degli ordini randomici per testare la mia app
-        self._allP.extend(self._dao.getAllProdotti())
-        self._allC.extend(self._dao.getAllClienti())
+        self._allP.extend(DAO.getAllProdotti())
+        self._allC.extend(DAO.getAllClienti())
 
         for i in range(10):
             indexP = random.randint(0 , len(self._allP)-1)
@@ -54,11 +54,11 @@ class GestoreOrdini:
                       cliente)
 
     def _update_DB(self , prod , cliente):
-        if not self._dao.hasProdotto(prod):
-            self._dao.addProdotto(prod)
+        if not DAO.hasProdotto(prod):
+            DAO.addProdotto(prod)
 
-        if not self._dao.hasCliente(cliente):
-            self._dao.addCliente(cliente)
+        if not DAO.hasCliente(cliente):
+            DAO.addCliente(cliente)
 
     def processa_prossimo_ordine(self):
         """Questo metodo legge il prossimo ordine in coda e lo gestisce"""
